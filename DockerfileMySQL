@@ -1,3 +1,5 @@
 FROM mysql:5.7.9
+MAINTAINER Manuel Vogel
+
 ADD ./sql/create-tables.sql /docker-entrypoint-initdb.d/create-tables.sql
 ADD ./sql/initial.sql /docker-entrypoint-initdb.d/initial.sql
