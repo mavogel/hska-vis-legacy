@@ -1,5 +1,5 @@
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
-[![Travis Build Status](https://travis-ci.org/mavogel/vis-lab.svg?branch=master)](https://travis-ci.org/mavogel/hska-vis-legacy)
+[![Travis Build Status](https://travis-ci.org/mavogel/hska-vis-legacy.svg?branch=master)](https://travis-ci.org/mavogel/hska-vis-legacy)
 
 # Distributed Information Systems Laboratory aka vis-lab
 This project is the quick setup of the legacy webshop of 
@@ -14,8 +14,8 @@ the masters course 'Distributed Information Systems' at the University of Applie
 - Start Docker daemon
 - Check out the project, export variables and simply run the script:
 ```bash
-$ chmod +x run_legacy.sh
-$ ./run_legacy.sh
+$ chmod +x build_and_run.sh
+$ ./build_and_run.sh
 ```
 - Builds the web app `war`, packs it into a docker tomcat8 container,
 and sets the user `tomcat` with password `admin` for the Management Console at [http://localhost:8888/](http://localhost:8888/)
