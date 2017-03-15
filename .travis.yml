@@ -1,0 +1,31 @@
+sudo: required
+
+services:
+  - docker
+
+# travis runs implicitly 'mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V'
+# and 'mvn test -B' if it finds a 'pom.xml' in the root.
+# see https://docs.travis-ci.com/user/languages/java/
+language: java
+jdk: oraclejdk8
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::7}
+
+after_success:
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
+
+  # CONFIGURED DB IMAGE
+  - export WEBSHOP_DB_IMAGE=mavogel/hska-vis-web-shop-db-image
+  - docker build -t $WEBSHOP_DB_IMAGE -f DockerfileMySQL .
+  - docker tag $WEBSHOP_DB_IMAGE:$COMMIT $WEBSHOP_DB_IMAGE:$TAG
+  - docker push $WEBSHOP_DB_IMAGE
+
+  # LEGACY WEBSHOP
+  - mvn clean package
+  - export LEGACY_WEBSHOP=mavogel/hska-vis-legacywebshop
+  - docker build -t $LEGACY_WEBSHOP:$COMMIT .
+  - docker tag $LEGACY_WEBSHOP:$COMMIT $LEGACY_WEBSHOP:$TAG
+  - docker push $LEGACY_WEBSHOP

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory name="">
+
+        <!-- mysql Konfiguration -->
+        <!--Note: 'web-shop-db-image' ist the url you give in the '../docker-compose.yml' as link alias -->
+        <property name="connection.url">jdbc:mysql://web-shop-db-image:3306/webshop</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.username">webshopuser</property>
+        <property name="connection.password">240b2c6d58ff2ce2f508b49f</property>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="current_session_context_class">thread</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.connection.autoReconnect">true</property>
+
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="hska.iwi.eShopMaster.model.database.dataobjects.Category"/>
+        <mapping class="hska.iwi.eShopMaster.model.database.dataobjects.Product"/>
+        <mapping class="hska.iwi.eShopMaster.model.database.dataobjects.User"/>
+        <mapping class="hska.iwi.eShopMaster.model.database.dataobjects.Role"/>
+
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.custom.i18n.resources" value="ApplicationResources" /> 
+
+    
+    <!-- Add packages here -->
+    
+        <package name="hska.iwi.eShopMaster" extends="struts-default">
+        
+        <!-- Login: -->
+        <action name="LoginAction" class="hska.iwi.eShopMaster.controller.LoginAction">
+            <result name="success" >/pages/start.jsp</result>
+            <result name="input">index.jsp</result>
+        </action>
+        
+        <!-- Register: -->
+        <action name="RegisterAction" class="hska.iwi.eShopMaster.controller.RegisterAction">
+             <result name="success" type="redirect">/index.jsp</result>
+            <result name="input">/pages/register.jsp</result>
+        </action>
+        
+        <!-- List all products -->
+        <action name="listAllProducts" class="hska.iwi.eShopMaster.controller.ListAllProductsAction">
+        	<result name="success">/pages/start.jsp</result>
+        	<result name="input" type="redirect">LogoutAction</result>
+        </action>
+        
+        <!-- Logout:  -->
+        <action name="LogoutAction" class="hska.iwi.eShopMaster.controller.LogoutAction">
+        	<result name="success">/index.jsp</result>
+        </action>
+                
+        <!-- Search:  -->
+        <action name="SearchAction" class="hska.iwi.eShopMaster.controller.SearchAction">
+        	<result name="success">/pages/start.jsp</result>
+        	<result name="input">/pages/start.jsp</result>
+        </action>
+        
+         <!-- Init Category:  -->
+        <action name="InitCategorySiteAction" class="hska.iwi.eShopMaster.controller.InitCategorySiteAction">
+        	<result name="input">/pages/start.jsp</result>
+	        <result name="successC">/pages/categories.jsp</result>
+	        <result name="successP">/pages/product_add.jsp</result>
+        </action>
+        
+		<!-- Product Details:  -->
+        <action name="ProductDetailsAction" class="hska.iwi.eShopMaster.controller.ProductDetailsAction">
+        	<result name="success">/pages/product_details.jsp</result>
+        	<result name="input" type="redirect">listAllProducts</result>
+        </action>
+        
+       	<!-- Add Product:  -->
+        <action name="AddProductAction" class="hska.iwi.eShopMaster.controller.AddProductAction">
+        	<result name="success" type="redirect">listAllProducts</result>
+        	<result name="input">/pages/product_add.jsp</result>
+        </action>
+        
+        <!-- Delete Product:  -->
+        <action name="DeleteProductAction" class="hska.iwi.eShopMaster.controller.DeleteProductAction">
+        	<result name="success" type="redirect">listAllProducts</result>
+        	<result name="input" type="redirect">listAllProducts</result>
+        </action>
+        
+        <!-- Add Category:  -->
+        <action name="AddCategoryAction" class="hska.iwi.eShopMaster.controller.AddCategoryAction">
+	        <result name="success">/pages/categories.jsp</result>
+	        <result name="input">/pages/categories.jsp</result>
+        </action>
+        
+        <!-- Delete Category:  -->
+        <action name="DeleteCategoryAction" class="hska.iwi.eShopMaster.controller.DeleteCategoryAction">
+        	<result name="input" type="redirect">LogoutAction</result>
+        	<result name="success">/pages/categories.jsp</result>
+        </action>
+       
+    </package>
+
+</struts>
