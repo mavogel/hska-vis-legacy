@@ -35,11 +35,11 @@ echo "-> Fine √"
 # 2: Build legacy webshop
 info "Bulding legacy web shop"
 mvn clean package
-docker build -t hska/vis-legacywebshop .
+docker build -t mavogel/hska-vis-legacywebshop .
 
 # 3: Build initialized MySQL Database image
 info "Building initialized MySQL Database image"
-docker build -t hska/vis-web-shop-db-image -f DockerfileMySQL .
+docker build -t mavogel/hska-vis-web-shop-db-image -f DockerfileMySQL .
 
 # 4: Compose all together and init db
 info "Composing MySQL Server container, tomcat8 and deploying webshop war"
