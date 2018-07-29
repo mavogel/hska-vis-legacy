@@ -1,7 +1,9 @@
 version: '3.2'
 services:
   legacywebshop:
-    image: mavogel/hska-vis-legacywebshop
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
     ports:
       - "8888:8080"
     networks:
@@ -10,7 +12,9 @@ services:
               - legacywebshop
 
   web-shop-db-image:
-    image: mavogel/hska-vis-web-shop-db-image
+    build:
+      context: ./
+      dockerfile: ./docker/DockerfileMySQL
     volumes:
       - "./.data/db:/var/lib/mysql"
     environment:

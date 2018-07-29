@@ -10,56 +10,44 @@ the masters course 'Distributed Information Systems' at the University of Applie
 - [Usage](#usage)
     - [Quick Start](#quick-start)
     - [Built it on your own](#built-it-on-your-own)
-- [Notes](#notes)
-    - [WindowsSupport](#windows-support)
-    - [Travis Support](#travis-support)
-    - [Database cleanup](#database-cleanup)
+- [Database cleanup](#database-cleanup)
 - [License](#license)
 
 ## <a name="prerequisites"></a>Prerequisites
-- [maven](https://maven.apache.org/)
 - [docker](https://docker.com)
-- docker-compose
+- with `docker-compose`
 
 ## <a name="usage"></a>Usage
 You can run the images from `docker hub` which is preferred or built it on your own.
+First: Start Docker daemon and check with `docker ps`
 
 ### <a name="quick-start"></a>Quick Start (docker-hub)
-- Start Docker daemon
 - Copy the `docker-compose.yml` locally in a desired folder and run
 ```bash
 $ docker-compose up -d
 # to follow the logs
 $ docker-compose logs -tf
+# to shutdown
+$ docker-compose down
 ```
 
 ### <a name="built-it-on-your-own"></a>Built it on your own
-- Start Docker daemon
-- Check out the project, export variables and simply run the script:
-```bash
-$ chmod +x build_and_run.sh
-$ ./build_and_run.sh
-```
-- It builds the web app `war`, packs it into a docker tomcat8 container,
-and sets the user `tomcat` with password `admin` for the Management Console at [http://localhost:8888/](http://localhost:8888/)
-- Initializes the MySQL Database docker container with the db user defined in `hibernate.cfg.xml`
-- Sets up both containers and make the legacy webshop available under [http://localhost:8888/EShop-1.0.0/](http://localhost:8888/EShop-1.0.0/)
+- Run `docker-compose -f docker-compose-local.yml up -d` which will
+    - It builds the web app `war` in a staged build, packs it into a docker tomcat8 container,
+    and sets the user `tomcat` with password `admin` for the Management Console at http://localhost:8888/
+    - Initializes the MySQL Database docker container with the db user defined in `hibernate.cfg.xml`
+    - Sets up both containers and make the legacy webshop available under http://localhost:8888/EShop-1.0.0
+- Follow the logs via `docker-compose -f docker-compose-local.yml logs -tf`
+- To shutdown the containers run `docker-compose -f docker-compose-local.yml down`
 
-## <a name="notes"></a>Notes
-### <a name="windows-support"></a>Windows support
-This project has not been tested on Windows. Feel free to contribute a `.bat` file.
-
-### <a name="travis-support"></a>Travis support
-Add a `$DOCKER_USER` and `$DOCKER_PASS` variable to the travis build if you want CI.
-
-### <a name="database-cleanup"></a>Database Cleanup
+## <a name="database-cleanup"></a>Database Cleanup
 If you change the user and password of the MySQL database, you should run
 ```bash
-$ docker-compose -f docker-compose-legacy.yml rm -v
+$ docker-compose rm -v
 $ rm -rf .data
 ```
 Details can be found [here](https://github.com/docker-library/mysql/issues/51)
 
 ## <a name="license"></a>License
-    Copyright (c) 2017 Manuel Vogel
-    Source code is open source and released under the MIT license.
+Copyright (c) 2017-2018 Manuel Vogel
+Source code is open source and released under the MIT license.
